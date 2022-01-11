@@ -1,6 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import { useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Products from "./components/Products/Products";
@@ -288,7 +287,7 @@ function App() {
   ];
   const [initProductsList, setInitProductsList] = useState([]);
   const [filterProductsList, setFilterProductsList] = useState([]);
-
+  //מתבצע אחרי הרנדור הראשון
   useEffect(() => {
     fetch("https://fakestoreapi.com/products/")
       .then((res) => res.json())
@@ -296,11 +295,16 @@ function App() {
         setInitProductsList(products);
         setFilterProductsList(products);
       });
+
+    // return () => {
+    //   console.log("Cora Brandor last");
+    // };
   }, []);
 
   const categories = initProductsList
     .map((p) => p.category)
     .filter((value, index, array) => array.indexOf(value) === index);
+  categories.unshift("All");
 
   const categoriesArr = (select) => {
     setFilterProductsList(
