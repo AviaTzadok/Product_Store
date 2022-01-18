@@ -1,5 +1,8 @@
 import "./Product.css";
+import { Link } from "react-router-dom";
+
 // product
+
 function Product({
   id,
   title,
@@ -12,7 +15,9 @@ function Product({
 }) {
   return (
     <div className="Product-card">
-      <div>{title}</div>
+      <div>
+        <Link to={`/productPage/${id}`}>{title}</Link>
+      </div>
       <div className="Product-image">
         <img src={image} />
       </div>
